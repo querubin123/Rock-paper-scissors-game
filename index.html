@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock paper scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <div class="container">
+        <div class="score">
+            <p>User: <span  id="user"></span></p>
+            <p>Computer: <span id="computer"></span></p>
+            <p>Tie: <span id="tie"> </span></p>
+        </div>
+        <div class="button-container-box">
+            <div class="button-container">
+                <p>PAPER</p>
+                <button onclick="chooseOptions('paper')"><img src="paper.png" alt="rock"></button>
+            </div>
+            <div class="button-container">
+                <p>ROCK</p>
+                <button onclick="chooseOptions('rock')"><img src="rock.png" alt="rock"></button>
+            </div>
+            <div class="button-container">
+                <p>SCISSORS</p>
+                <button onclick="chooseOptions('scissor')"><img src="scissors.png" alt="rock"></button>  
+            </div>
+        </div>
+      
+    </div>
+
+
+
+    <script>
+             // 0 equivalent to rock
+            // 1 equivalent to paper
+            // 2 equivalent to scissor
+            let choose = ''
+            let result = '';
+            let userScore = 0;
+            let computerScore = 0;
+            let tieScore = 0;
+
+        function chooseOptions(userChoice){
+           
+            const computerChoice = Math.floor(Math.random() * 3);
+            
+            if(userChoice === 'rock' && computerChoice === 0){
+                choose = 'rock';
+                result = `It's a tie`;
+                alert(`Computer picked ${choose}, you picked ${choose}. ${result}`);
+                document.getElementById("tie").innerText = ` ${tieScore+=1}`;
+
+                if(userChoice === 'paper' && computerChoice === 1){
+                    choose = 'paper';
+                    result = `It's a tie`;
+                    alert(`Computer picked ${choose}, you picked ${choose}. ${result}`);
+                    document.getElementById("tie").innerText = ` ${tieScore+=1}`;
+
+
+                    if(userChoice === 'scissor' && computerChoice === 2){
+                    choose = 'scissor';
+                    result = `It's a tie`;
+                    alert(`Computer picked ${choose}, you picked ${choose}. ${result}`);
+                    document.getElementById("tie").innerText = ` ${tieScore+=1}`;
+
+                }
+                }
+            }
+            else if(userChoice === 'rock' && computerChoice === 2){
+                choose = 'rock';
+                result = 'You win';
+                alert(`Computer picked scissor, you picked ${choose}. ${result}`);
+                document.getElementById("user").innerText = ` ${userScore+=1}`;
+            }
+            else if(userChoice === 'paper' && computerChoice === 0){
+                choose = 'paper';
+                result = 'You win';
+                alert(`Computer picked rock, you picked ${choose}. ${result}`);
+                document.getElementById("user").innerText = ` ${userScore+=1}`;
+            }
+            else if(userChoice === 'scissor' && computerChoice === 1){
+                choose = 'scissor';
+                result = 'You win';
+                alert(`Computer picked paper, you picked ${choose}. ${result}`);
+                document.getElementById("user").innerText = ` ${userScore+=1}`;
+            }
+            else if(userChoice === 'rock' && computerChoice === 1){
+                choose = 'rock';
+                result = 'You lose';
+                alert(`Computer picked paper, you picked ${choose}. ${result}`);
+                document.getElementById("computer").innerText = ` ${computerScore+=1}`;
+            }
+            else if(userChoice === 'scissor' && computerChoice === 0){
+                choose = 'scissor';
+                result = 'You lose';
+                alert(`Computer picked rock, you picked ${choose}. ${result}`);
+                document.getElementById("computer").innerText = ` ${computerScore+=1}`;
+            }
+            else if(userChoice === 'paper' && computerChoice === 2){
+                choose = 'paper';
+                result = 'You lose';
+                alert(`Computer picked scissor, you picked ${choose}. ${result}`);
+                document.getElementById("computer").innerText = ` ${computerScore+=1}`;
+            }
+        }
+    </script>
+</body>
+</html>

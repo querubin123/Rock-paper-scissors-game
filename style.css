@@ -1,0 +1,46 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container{
+   position: relative;
+}
+.score{
+    display: flex;
+    padding: 1rem;
+    background-color: rgb(121, 43, 43);
+}
+.button-container-box{
+    height: 91vh;
+    width: 100%;
+    background-color: rgb(53, 53, 53);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+.button-container{
+    position: relative;
+}
+button{
+    background-color: rgb(244, 244, 118);
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 2rem;
+    border-radius: 100%;
+}
+img{
+    height: 150px;
+    width: 150px;
+}
+p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+    color: aliceblue;
+    margin-bottom: 2rem;
+}
+#user,#computer,#tie{
+    margin: 0 2rem;
+}
