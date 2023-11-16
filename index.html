@@ -13,99 +13,190 @@
             <p>User: <span  id="user"></span></p>
             <p>Computer: <span id="computer"></span></p>
             <p>Tie: <span id="tie"> </span></p>
+            <button class="reset-button">Reset Score</button>   
         </div>
+
+        <div class="result">
+            <p>You: <img src="" id="userResult"></img></p>
+            <p>Computer: <img src="" id="computerResult"></img></p>
+        </div>
+
         <div class="button-container-box">
             <div class="button-container">
-                <p>PAPER</p>
+                <p class="label">PAPER</p>
                 <button onclick="chooseOptions('paper')"><img src="paper.png" alt="rock"></button>
             </div>
             <div class="button-container">
-                <p>ROCK</p>
+                <p class="label">ROCK</p>
                 <button onclick="chooseOptions('rock')"><img src="rock.png" alt="rock"></button>
             </div>
             <div class="button-container">
-                <p>SCISSORS</p>
+                <p class="label">SCISSORS</p>
                 <button onclick="chooseOptions('scissor')"><img src="scissors.png" alt="rock"></button>  
             </div>
+           
         </div>
       
     </div>
 
-
-
     <script>
-             // 0 equivalent to rock
-            // 1 equivalent to paper
-            // 2 equivalent to scissor
-            let choose = ''
-            let result = '';
-            let userScore = 0;
-            let computerScore = 0;
-            let tieScore = 0;
+        let choose,result,userImagePath,computerImagePath
+            = ''
+        let resetButton = document.querySelector('.reset-button');
+        let computerResult = document.getElementById('computerResult');
+        let userResult = document.getElementById('userResult');
+        let score = JSON.parse(localStorage.getItem("gameStorage")) ||                 ({wins: 0, loses: 0, tie: 0});
+        console.log(score);
+
+        document.getElementById("tie").innerText = `${score.tie}`;
+        document.getElementById("user").innerText = `${score.wins}`;
+        document.getElementById("computer").innerText = `${score.loses}`;
 
         function chooseOptions(userChoice){
-           
+            // 0 equivalent to rock
+            // 1 equivalent to paper
+            // 2 equivalent to scissor
             const computerChoice = Math.floor(Math.random() * 3);
             
-            if(userChoice === 'rock' && computerChoice === 0){
-                choose = 'rock';
-                result = `It's a tie`;
-                alert(`Computer picked ${choose}, you picked ${choose}. ${result}`);
-                document.getElementById("tie").innerText = ` ${tieScore+=1}`;
+            if(userChoice === 'rock'){
+                if(computerChoice===0){
+                    choose = 'rock';
+                    result = `It's a tie`;
+                    score.tie++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("tie").innerText = `${score.tie}`;
+                    userImagePath = 'rock.png';
+                    userResult.src = userImagePath;
+                    computerResult.src = userImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }   
+                else if(computerChoice===1){
+                    choose = 'paper';
+                    result = `You lose`;
+                    score.loses++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("computer").innerText = `${score.loses}`;
+                    userImagePath = 'rock.png';
+                    computerImagePath = 'paper.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }
+                else if(computerChoice===2){
+                    choose = 'scissor';
+                    result = `You win`;
+                    score.wins++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("user").innerText = `${score.wins}`;
+                    userImagePath = 'rock.png';
+                    computerImagePath = 'scissors.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }
+            }
 
-                if(userChoice === 'paper' && computerChoice === 1){
+            else if(userChoice === 'paper'){
+                if(computerChoice===0){
+                    choose = 'rock';
+                    result = `You win`;
+                    score.wins++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("user").innerText = `${score.wins}`;
+                    userImagePath = 'paper.png';
+                    computerImagePath = 'rock.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }   
+                else if(computerChoice===1){
                     choose = 'paper';
                     result = `It's a tie`;
-                    alert(`Computer picked ${choose}, you picked ${choose}. ${result}`);
-                    document.getElementById("tie").innerText = ` ${tieScore+=1}`;
+                    score.tie++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("tie").innerText = `${score.tie}`;
+                    userImagePath = 'paper.png';
+                    computerImagePath = 'paper.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }
+                else if(computerChoice===2){
+                    choose = 'scissor';
+                    result = `You lose`;
+                    score.loses++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("computer").innerText = `${score.loses}`;
+                    userImagePath = 'paper.png';
+                    computerImagePath = 'scissors.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }
+            }
 
-
-                    if(userChoice === 'scissor' && computerChoice === 2){
+            else if(userChoice === 'scissor'){
+                if(computerChoice===0){
+                    choose = 'rock';
+                    result = `You lose`;
+                    score.loses++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("computer").innerText = `${score.loses}`;
+                    userImagePath = 'scissors.png';
+                    computerImagePath = 'rock.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }   
+                else if(computerChoice===1){
+                    choose = 'paper';
+                    result = `You win`;
+                    score.wins++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("user").innerText = `${score.wins}`;
+                    userImagePath = 'scissors.png';
+                    computerImagePath = 'paper.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
+                }
+                else if(computerChoice===2){
                     choose = 'scissor';
                     result = `It's a tie`;
-                    alert(`Computer picked ${choose}, you picked ${choose}. ${result}`);
-                    document.getElementById("tie").innerText = ` ${tieScore+=1}`;
-
+                    score.tie++;
+                    alert(`Computer picked ${choose}, you picked ${userChoice}. ${result}`);
+                    document.getElementById("tie").innerText = `${score.tie}`;
+                    userImagePath = 'scissors.png';
+                    computerImagePath = 'scissors.png'
+                    userResult.src = userImagePath;
+                    computerResult.src = computerImagePath;
+                    userResult.style.display='block';
+                    computerResult.style.display='block';
                 }
-                }
             }
-            else if(userChoice === 'rock' && computerChoice === 2){
-                choose = 'rock';
-                result = 'You win';
-                alert(`Computer picked scissor, you picked ${choose}. ${result}`);
-                document.getElementById("user").innerText = ` ${userScore+=1}`;
-            }
-            else if(userChoice === 'paper' && computerChoice === 0){
-                choose = 'paper';
-                result = 'You win';
-                alert(`Computer picked rock, you picked ${choose}. ${result}`);
-                document.getElementById("user").innerText = ` ${userScore+=1}`;
-            }
-            else if(userChoice === 'scissor' && computerChoice === 1){
-                choose = 'scissor';
-                result = 'You win';
-                alert(`Computer picked paper, you picked ${choose}. ${result}`);
-                document.getElementById("user").innerText = ` ${userScore+=1}`;
-            }
-            else if(userChoice === 'rock' && computerChoice === 1){
-                choose = 'rock';
-                result = 'You lose';
-                alert(`Computer picked paper, you picked ${choose}. ${result}`);
-                document.getElementById("computer").innerText = ` ${computerScore+=1}`;
-            }
-            else if(userChoice === 'scissor' && computerChoice === 0){
-                choose = 'scissor';
-                result = 'You lose';
-                alert(`Computer picked rock, you picked ${choose}. ${result}`);
-                document.getElementById("computer").innerText = ` ${computerScore+=1}`;
-            }
-            else if(userChoice === 'paper' && computerChoice === 2){
-                choose = 'paper';
-                result = 'You lose';
-                alert(`Computer picked scissor, you picked ${choose}. ${result}`);
-                document.getElementById("computer").innerText = ` ${computerScore+=1}`;
-            }
+            const storage = localStorage.setItem("gameStorage",JSON.stringify(score));
+            return score;
         }
+
+        resetButton.addEventListener("click" , ()=>{
+                score = {wins: 0, loses:0, tie:0};
+                userResult.style.display='none';
+                computerResult.style.display='none';
+                document.getElementById("tie").innerText = `${score.tie}`;
+                document.getElementById("user").innerText = `${score.wins}`;
+                document.getElementById("computer").innerText = `${score.loses}`;
+                let resetScore = localStorage.removeItem("gameStorage");
+                return score;
+            });
+            
     </script>
 </body>
 </html>

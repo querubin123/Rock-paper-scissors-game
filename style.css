@@ -8,6 +8,7 @@
 }
 .score{
     display: flex;
+    align-items: center;
     padding: 1rem;
     background-color: rgb(121, 43, 43);
 }
@@ -23,6 +24,16 @@
 .button-container{
     position: relative;
 }
+.result{
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+    background-color: rgb(99, 29, 29);
+    box-shadow: 0 0 0.3rem #212121;
+}
+.result p{
+    margin-right: 1rem;
+}
 button{
     background-color: rgb(244, 244, 118);
     outline: none;
@@ -35,12 +46,27 @@ img{
     height: 150px;
     width: 150px;
 }
-p{
+p,.reset-button{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+p{
     text-align: center;
     color: aliceblue;
-    margin-bottom: 2rem;
 }
-#user,#computer,#tie{
-    margin: 0 2rem;
+.label{
+    margin-bottom: 1rem;
+}
+span{
+    margin-right: 2rem;
+    margin-left: 0.9rem;
+}
+.reset-button{
+    margin-left: auto;
+    background-color: rgb(231, 228, 235);
+    border-radius: 8px;
+    padding: 0.6rem 1.1rem;
+    color:  black;
+}
+#computerResult,#userResult{
+    display: none;
 }
