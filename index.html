@@ -13,7 +13,9 @@
             <p>User: <span  id="user"></span></p>
             <p>Computer: <span id="computer"></span></p>
             <p>Tie: <span id="tie"> </span></p>
-            <button class="reset-button">Reset Score</button>   
+            <button class="reset-button">Reset Score</button>
+            <button class="autoplay-button" onclick="autoplay()">Autoplay</button>
+
         </div>
 
         <div class="result">
@@ -45,6 +47,7 @@
         let resetButton = document.querySelector('.reset-button');
         let computerResult = document.getElementById('computerResult');
         let userResult = document.getElementById('userResult');
+        let computerChoice = Math.floor(Math.random() * 3);
         let score = JSON.parse(localStorage.getItem("gameStorage")) ||                 ({wins: 0, loses: 0, tie: 0});
         console.log(score);
 
@@ -52,11 +55,31 @@
         document.getElementById("user").innerText = `${score.wins}`;
         document.getElementById("computer").innerText = `${score.loses}`;
 
+
+        let click = true;
+        let setAutomatic;
+        
+        function autoplay() {  
+            if(click){
+                setAutomatic = setInterval(function() {
+                const choices = ['rock', 'paper', 'scissor'];
+                const randomIndex = Math.floor(Math.random() * choices.length);
+                const userChoice = choices[randomIndex];
+                chooseOptions(userChoice);
+              }, 3000);
+            }
+            else{
+                clearInterval(setAutomatic);
+                alert('Autoplay being stop!!');
+            }
+            click = !click;
+        }
+
+
         function chooseOptions(userChoice){
             // 0 equivalent to rock
             // 1 equivalent to paper
             // 2 equivalent to scissor
-            const computerChoice = Math.floor(Math.random() * 3);
             
             if(userChoice === 'rock'){
                 if(computerChoice===0){
@@ -197,6 +220,7 @@
                 return score;
             });
             
+       
     </script>
 </body>
 </html>
